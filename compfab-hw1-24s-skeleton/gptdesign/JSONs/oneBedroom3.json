@@ -1,0 +1,31 @@
+[
+    {
+      "label": "Living Room",
+      "width": 12,
+      "height": 15,
+      "offsetx": 0,
+      "offsety": 0
+    },
+    {
+      "label": "Kitchen",
+      "width": 8,
+      "height": 10,
+      "offsetx": 12,
+      "offsety": 0
+    },
+    {
+      "label": "Bedroom",
+      "width": 12,
+      "height": 12,
+      "offsetx": 0,
+      "offsety": 15
+    },
+    {
+      "label": "Bathroom",
+      "width": 8,
+      "height": 6,
+      "offsetx": 12,
+      "offsety": 10
+    }
+  ]
+  

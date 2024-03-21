@@ -4,7 +4,7 @@ from svgwrite import mm, Drawing
 import json
 from typing import TypedDict, Union, cast
 from pathlib import Path
-from typeguard import typechecked
+##from typeguard import typechecked
 import cairosvg
 import fire
 
@@ -30,7 +30,7 @@ COLORS = {
 }
 
 
-@typechecked
+##@typechecked
 def draw_room(dwg: Drawing, room: Room) -> None:
     """Helper function to draw each room."""
     room_color = COLORS.get(room["label"], "white")
@@ -74,7 +74,7 @@ def draw_room(dwg: Drawing, room: Room) -> None:
     )
 
 
-@typechecked
+##@typechecked
 def draw_border(dwg: Drawing, room: Room) -> None:
     """Helper function to draw each room."""
     stroke_color = COLORS.get(room["label"], "black")
@@ -90,7 +90,7 @@ def draw_border(dwg: Drawing, room: Room) -> None:
     )
 
 
-@typechecked
+##@typechecked
 def generate_floor_plan(filename: Union[str, Path], output: Union[str, Path]):
     """
     Generates a PNG image of floor plans from a JSON file.

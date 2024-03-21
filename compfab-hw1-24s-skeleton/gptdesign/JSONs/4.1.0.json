@@ -1,0 +1,16 @@
+[
+        {
+          "label": "Livingroom",
+          "width": 10,
+          "height": 8,
+          "offsetx": 0,
+          "offsety": 0
+        },
+        {
+          "label": "bedroom",
+          "width": 8,
+          "height": 6,
+          "offsetx": 10,
+          "offsety": 0
+        }
+      ]

@@ -1,0 +1,44 @@
+[
+    {
+      "label": "Bedroom 1",
+      "width": 10,
+      "height": 12,
+      "offsetx": 0,
+      "offsety": 0
+    },
+    {
+      "label": "Bathroom 1",
+      "width": 6,
+      "height": 8,
+      "offsetx": 10,
+      "offsety": 0
+    },
+    {
+      "label": "Bedroom 2",
+      "width": 10,
+      "height": 12,
+      "offsetx": 16,
+      "offsety": 0
+    },
+    {
+      "label": "Bathroom 2",
+      "width": 6,
+      "height": 8,
+      "offsetx": 26,
+      "offsety": 0
+    },
+    {
+      "label": "Living Room",
+      "width": 20,
+      "height": 16,
+      "offsetx": 0,
+      "offsety": 12
+    },
+    {
+      "label": "Kitchen",
+      "width": 14,
+      "height": 10,
+      "offsetx": 20,
+      "offsety": 12
+    }
+  ]
