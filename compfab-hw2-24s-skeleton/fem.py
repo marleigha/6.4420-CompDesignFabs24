@@ -163,8 +163,9 @@ class StaticFEM:
             #   - Use `A.T` or `np.transpose(A)` to transpose a 2D array A
             #   - Use the `@` operator for matrix multiplication
             tet_vertices = vertices[T[t]]
-            Ds = ...    # <--
-            F = ...     # <--
+            # following Ds = [X2 - X1, X3 - X1, X4 - X1]
+            Ds = np.array([tet_vertices[1] - tet_vertices[0]],[tet_vertices[2] - tet_vertices[0]], [tet_vertices[3] - tet_vertices[0]] )   # <--
+            F = Ds @ Dm_inv    # <-- F = Ds * Dm^(-1)
 
             # Compute tet element t's contribution to the stiffness matrix K
             # Formula: Kt = d^2(Et)/d(xt)^2, where
@@ -182,9 +183,9 @@ class StaticFEM:
             # Let's first prepare the operands
             # --------
             # TODO: Your code here. Get the volume of t, dP/dF and dF/dx.
-            vol = ...       # <--
-            dP_dF = ...     # <--
-            dF_dxt = ...    # <--
+            vol = volumes[t]      # <--
+            dP_dF = material.stress_differential(dP_dF)    # <--
+            dF_dxt = dF_dxt[t]  # <--
 
             # Compute Kt using the formula above
             # --------

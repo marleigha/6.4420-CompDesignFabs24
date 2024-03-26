@@ -64,6 +64,7 @@ class LinearElastic(Material):
         P = self.mu * (F + F.T - 2 * I) + self.lm * (F.trace() - dim) * I
         return P
 
+
     def stress_differential(self, F: array) -> array:
         '''
         Compute the differential of the stress tensor P w.r.t. the deformation gradient F.
@@ -88,28 +89,35 @@ class LinearElastic(Material):
         # --------
         # TODO: Your code here. Think about which elements in d(F.T)/dF are non-zero.
         dFT_dF = np.zeros((dim2, dim2))
-        for i in []:        # <--
-            for j in []:    # <--
-                ...         # <--
+        for i in range(dim2):        # <--
+            for j in range(dim2):    # <-- so we can reach each index of the matrix
+                if dim * (j%dim) + (j//dim):
+                    dFT_dF[i,j] = 1
+                else:
+                    dFT_dF[i,j] = 0    # <-- wasn't able to figure it out without conditional :/
 
         # Compute D1
         # --------
         # TODO: Your code here.
         # HINT: The `np.eye(n)` function creates an identify matrix of size nxn
-        D1 = np.zeros((dim2, dim2))     # <--
+        D1 = np.eye(dim2) + dFT_dF    # <-- D1 = I + d(F.T)/dF
 
         # Compute D2 = d(F.trace() * I)/dF
         # --------
         # TODO: Your code here. Think about which elements in D2 are non-zero
+        #
         D2 = np.zeros((dim2, dim2))
-        for i in []:        # <--
-            for j in []:    # <--
-                ...         # <--
+        for i in range(dim2):        # <--
+            for j in range(dim2):    # <--
+                if (i%dim) == (i//dim) and (j%dim) == (j//dim):
+                    D2[i,j] = 1        # <--
+                else:
+                    D2[i,j] = 0
 
         # Compute dP/dF
         # --------
         # TODO: Your code here.
-        dP_dF = np.zeros((dim2, dim2))      # <--
+        dP_dF = (mu * D1) + (lm * D2)      # <--
 
         return dP_dF
 
