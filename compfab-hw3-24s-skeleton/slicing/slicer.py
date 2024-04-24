@@ -142,7 +142,8 @@ def create_contours(intersection_edges: list[list[Edge]]) -> list[list[list[np.n
         contours[i] represents the i'th layer in your slice.
         contours[i][j] represents the j'th individual closed contour in the i'th layer.
         contours[i][j][k] is the k'th vertex of the j'th contour, and is itself a 1 x 3 matrix
-        of X,Y,Z vertex coordinates. You should not "close" the contour by adding the start point back
+        of X,Y,Z vertex coordinates. 
+        You should not "close" the contour by adding the start point back
         to the end of the list; this segment will be treated as implicitly present.
 
     Hints:
@@ -156,11 +157,73 @@ def create_contours(intersection_edges: list[list[Edge]]) -> list[list[list[np.n
         looping over all the other edges to figure out which are connected to it?
     """
     layers: list[list[list[np.ndarray]]] = []
-
+    contours: list[list[np.ndarray]] = []
     for i, layer in enumerate(intersection_edges):
         # TODO: Your code here.
         #       Build potentially many contours out of a single layer by connecting edges.
-        contours: list[list[np.ndarray]] = []
+        #       so we need to sort all the edges of that we're given such that edge (0,1)
+        #       goes to edge(1,2) goes to etc
+        #       and if there's a large gap/ connects back to the firs, we make it a dif contor!
+        #       aka the next j
+        #       so we'll use Edge.start and Edge.end to sortwhere the edges are in relation to others
+        #       i is the int related to the slice number
+        #       layer is the array of edges in the i'th slice
+        # if something is isolated and can't form a contor we'll just delete it
+        if len(layer)== 0:
+            i+=1
+        # #looking for the smallest edge
+        # smallestStartEdge = layer[0]
+        # for edge in layer:
+        #      if smallestStartEdge.start < edge.start:
+        #          smallestStartEdge = edge
+        #
+        else:
+            smallestStartEdge = layer[0]
+            # for edge in layer:
+            #     if smallestStartEdge.start < edge.start:
+            #         smallestStartEdge = edge
+        
+            currentEdge = smallestStartEdge
+            currentContour = [smallestStartEdge.start]
+            # edgeIndex = 0
+            # while i < len(layer):
+            # #both edges start in the same place-- append
+            # #or if one starts where another ends-- append
+            # #or one ends where another starts-- append
+            # #if (edge.start == currentEdge.start) or (edge.start == currentEdge.end) or (edge.end == currentEdge.start):
+            #     if (currentEdge.end.all == layer[edgeIndex].start.all):
+            #         currentContour.append(layer[edgeIndex].start)
+            #     elif(layer[edgeIndex].end.all == currentContour[0].all):
+            #         currentContour.append(layer[edgeIndex].end)
+            #         contours.append(currentContour)
+            #         currentContour = [layer[edgeIndex].end]
+            #     i+=1
+
+
+            for edge in layer:
+            #both edges start in the same place-- append
+            #or if one starts where another ends-- append
+            #or one ends where another starts-- append
+            #if (edge.start == currentEdge.start) or (edge.start == currentEdge.end) or (edge.end == currentEdge.start):
+                if (currentEdge.end.all == edge.start.all):
+                    currentContour.append(edge.start)
+                elif(edge.end.all == currentContour[0].all):
+                    currentContour.append(edge.end)
+                    contours.append(currentContour)
+                    currentContour = [edge.end]
+
+        
+        # #finding all the relevent elements of the countour
+        # difContour = []
+        # mostRecentEdge = smallestStartEdge
+        # for edge in layer:
+        #     if mostRecentEdge.end == edge.start:
+        #         jthContour.append(edge)
+        #         mostRecentEdge = edge
+        #     else:
+        #         difContour.append(edge)     
+
+        #contours: list[list[np.ndarray]] = []
         layers.append(contours)
 
     return layers
